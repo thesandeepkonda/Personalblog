@@ -642,90 +642,65 @@
             });
         });
 
-        // Header background change on scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            const scrolled = window.pageYOffset;
-            
-            if (scrolled > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.backdropFilter = 'blur(20px)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.1)';
-                header.style.backdropFilter = 'blur(10px)';
+        
+
+<!-- EmailJS script -->
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        let currentService = 'emailjs';
+
+        const emailConfig = {
+            targetEmail: 'kondasandeep56@gmail.com',
+            emailjs: {
+                serviceId: 'service_tt8ez4f',
+                templateId: '__ejs-test-mail-service__',
+                publicKey: 'CgrCW9zmZP6XI4qOB',
+               
             }
+        };
 
-            // Progress bar
-            const progressBar = document.getElementById('progressBar');
-            const scrollTop = document.documentElement.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrollPercent = (scrollTop / scrollHeight) * 100;
-            progressBar.style.width = scrollPercent + '%';
-        });
+        // Initialize EmailJS
+        emailjs.init(emailConfig.emailjs.userId);
 
-        // Form submission
+        // Function to send email using EmailJS service
+        function sendEmail(formData) {
+            if (currentService === 'emailjs') {
+                emailjs.send(
+                    emailConfig.emailjs.serviceId,
+                    emailConfig.emailjs.templateId,
+                    formData,
+                    emailConfig.emailjs.publicKey
+                )
+                .then((response) => {
+                    console.log('Email sent successfully!', response.status, response.text);
+                    alert('Thank you for your message! I\'ll get back to you soon.');
+                })
+                .catch((error) => {
+                    console.error('Failed to send email:', error);
+                    alert('There was an error sending your message. Please try again.');
+                });
+            }
+        }
+
+        // Handle form submission
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            // Simulate form submission
-            const submitBtn = this.querySelector('.submit-btn');
-            const originalText = submitBtn.textContent;
-            
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-            
-            setTimeout(() => {
-                alert('Thank you for your message! I\'ll get back to you soon.');
-                this.reset();
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
+
+            // Get the form data
+            const formData = {
+                from_name: document.getElementById('from_name').value,
+                to_email: emailConfig.targetEmail,
+                message: document.getElementById('message').value,
+                email: document.getElementById('email').value // Add email as part of the data
+            };
+
+            // Call the sendEmail function
+            sendEmail(formData);
+
+            // Optionally reset the form after submission
+            this.reset();
         });
-
-        // Animate skill cards on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.skill-card, .project-card').forEach(card => {
-            observer.observe(card);
-        });
-
-        // Floating icons animation
-        const floatingIcons = document.querySelectorAll('.floating-icon');
-        floatingIcons.forEach((icon, index) => {
-            icon.style.animationDelay = `${index * 0.5}s`;
-            icon.style.animationDuration = `${6 + index}s`;
-        });
-
-        // Dynamic typing effect for hero subtitle
-        const heroSubtitle = document.querySelector('.hero p:last-of-type');
-        const text = heroSubtitle.textContent;
-        heroSubtitle.textContent = '';
-        
-        let i = 0;
-        const typeWriter = () => {
-            if (i < text.length) {
-                heroSubtitle.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
-            }
-        };
-
-        setTimeout(typeWriter, 1500);
     </script>
 </body>
 </html>
+
