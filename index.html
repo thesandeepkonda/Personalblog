@@ -954,26 +954,40 @@
     <a href="https://wa.me/918008806996" class="whatsapp-button" target="_blank">
         <img src="assets/whatsapp-icon.png" alt="WhatsApp Icon" width="20"> Chat on WhatsApp
     </a>
-            </div>
-
-            <form class="contact-form" id="contactForm">
-                <div class="form-group">
-                    <label for="from_name">Name</label>
-                    <input type="text" id="from_name" name="from_name" required>
-                </div>
-                <div class="form-group">
-                    <label for="reply_to">Email</label>
-                    <input type="email" id="reply_to" name="reply_to" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit">Send Message</button>
-            </form>
+            <div>
+    <form class="contact-form" id="contactForm">
+        <div class="form-group">
+            <label for="from_name">Name</label>
+            <input type="text" id="from_name" name="from_name" required>
         </div>
+        <div class="form-group">
+            <label for="reply_to">Email</label>
+            <input type="email" id="reply_to" name="reply_to" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit">Send Message</button>
+    </form>
+
+    <!-- Div to show the error message -->
+    <div id="errorMessage" style="display:none; color: red;">
+        Sorry, there was an error sending your message. Please try again or contact me directly at kondasandeep56@gmail.com.
     </div>
-</section>
+</div>
+
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault();  // Prevent the form from submitting normally
+
+        // Simulate an error and show the message
+        document.getElementById('errorMessage').style.display = 'block';
+
+        // Optional: Reset the form (if needed)
+        document.getElementById('contactForm').reset();
+    });
+</script>
 
 <!-- Footer -->
 <footer class="footer">
