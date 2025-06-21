@@ -923,19 +923,22 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+   <!-- Contact Section -->
 <section id="contact" class="section section-dark">
     <div class="container">
         <h2 class="section-title">Get In Touch</h2>
         <p class="section-subtitle">
             Ready to discuss your next cloud project? Let's connect and build something amazing together.
         </p>
-        
+
         <div class="contact-content">
             <div class="contact-info">
                 <h3>Let's Work Together</h3>
-                <p>I'm always interested in discussing new opportunities, innovative projects, and ways to help businesses leverage cloud technologies.</p>
-                
+                <p>
+                    I'm always interested in discussing new opportunities, innovative projects,
+                    and ways to help businesses leverage cloud technologies.
+                </p>
+
                 <ul class="contact-details">
                     <li>
                         <i>📧</i>
@@ -950,42 +953,52 @@
                         <span>Available for freelance & full-time</span>
                     </li>
                 </ul>
-                 <!-- ✅ WhatsApp Button Goes Here -->
-    <a href="https://wa.me/918008806996" class="whatsapp-button" target="_blank">
-        <img src="assets/whatsapp-icon.png" alt="WhatsApp Icon" width="20"> Chat on WhatsApp
-    </a>
-            <div>
-    <form class="contact-form" id="contactForm">
-        <div class="form-group">
-            <label for="from_name">Name</label>
-            <input type="text" id="from_name" name="from_name" required>
-        </div>
-        <div class="form-group">
-            <label for="reply_to">Email</label>
-            <input type="email" id="reply_to" name="reply_to" required>
-        </div>
-        <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-        </div>
-        <button type="submit">Send Message</button>
-    </form>
 
-    <!-- Div to show the error message -->
-    <div id="errorMessage" style="display:none; color: red;">
-        Sorry, there was an error sending your message. Please try again or contact me directly at kondasandeep56@gmail.com.
-    </div>
-</div>
+                <!-- ✅ WhatsApp Button -->
+                <a href="https://wa.me/918008806996" class="whatsapp-button" target="_blank">
+                    <img src="assets/whatsapp-icon.png" alt="WhatsApp Icon" width="20">
+                    Chat on WhatsApp
+                </a>
+            </div> <!-- ✅ Closing div for contact-info -->
 
+            <!-- ✅ Contact Form -->
+            <div class="contact-form-container">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="from_name">Name</label>
+                        <input type="text" id="from_name" name="from_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reply_to">Email</label>
+                        <input type="email" id="reply_to" name="reply_to" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+
+                <!-- Error message div -->
+                <div id="errorMessage" style="display:none; color: red;">
+                    Sorry, there was an error sending your message. Please try again or contact me directly at 
+                    kondasandeep56@gmail.com.
+                </div>
+            </div> <!-- ✅ Closing div for contact-form-container -->
+        </div> <!-- ✅ Closing div for contact-content -->
+    </div> <!-- ✅ Closing div for container -->
+</section>
+
+<!-- Script to simulate form submission error -->
 <script>
     document.getElementById('contactForm').addEventListener('submit', function(event) {
-        event.preventDefault();  // Prevent the form from submitting normally
+        event.preventDefault();  // Prevent the default form submission
 
-        // Simulate an error and show the message
+        // Simulate error (you can replace this with real logic later)
         document.getElementById('errorMessage').style.display = 'block';
 
-        // Optional: Reset the form (if needed)
-        document.getElementById('contactForm').reset();
+        // Optional: Reset the form
+        this.reset();
     });
 </script>
 
