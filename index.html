@@ -655,7 +655,7 @@
     </footer>
 
     <!-- EmailJS script -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/emailjs/3.2.0/email.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/emailjs-com/3.2.0/email.min.js"></script>
     <script>
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -677,19 +677,24 @@
             document.getElementById('progressBar').style.width = scrolled + '%';
         });
 
-        // EmailJS Configuration
-        const emailConfig = {
-            serviceId: 'service_tt8ez4f',
-            templateId: 'template_rqq5rqd',
-            publicKey: 'CgrCW9zmZP6XI4qOB'
-        };
+        // Wait for EmailJS to load before initializing
+        window.addEventListener('load', function() {
+            // EmailJS Configuration
+            const emailConfig = {
+                serviceId: 'service_tt8ez4f',
+                templateId: 'template_rqq5rqd',
+                publicKey: 'CgrCW9zmZP6XI4qOB'
+            };
 
-        // Initialize EmailJS
-        (function() {
-            emailjs.init(emailConfig.publicKey);
-        })();
+            // Initialize EmailJS
+            if (typeof emailjs !== 'undefined') {
+                emailjs.init(emailConfig.publicKey);
+                console.log('EmailJS initialized successfully');
+            } else {
+                console.error('EmailJS failed to load');
+            }
 
-        // Function to show status message
+        // Function to show status message (fallback if EmailJS doesn't load)
         function showStatus(message, isSuccess) {
             const statusElement = document.getElementById('statusMessage');
             statusElement.textContent = message;
@@ -702,42 +707,62 @@
             }, 5000);
         }
 
-        // Handle form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+            // Function to show status message
+            function showStatus(message, isSuccess) {
+                const statusElement = document.getElementById('statusMessage');
+                statusElement.textContent = message;
+                statusElement.className = `status-message ${isSuccess ? 'status-success' : 'status-error'}`;
+                statusElement.style.display = 'block';
+                
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    statusElement.style.display = 'none';
+                }, 5000);
+            }
 
-            const submitBtn = document.getElementById('submitBtn');
-            const originalText = submitBtn.textContent;
-            
-            // Disable button and show loading state
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
+            // Handle form submission
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
 
-            // Get form data
-            const templateParams = {
-                from_name: document.getElementById('from_name').value,
-                email: document.getElementById('email').value,
-                subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value,
-                to_email: 'kondasandeep56@gmail.com'
-            };
+                // Check if EmailJS is available
+                if (typeof emailjs === 'undefined') {
+                    showStatus('Email service is not available. Please contact me directly at kondasandeep56@gmail.com', false);
+                    return;
+                }
 
-            // Send email using EmailJS
-            emailjs.send(emailConfig.serviceId, emailConfig.templateId, templateParams)
-                .then(function(response) {
-                    console.log('SUCCESS!', response.status, response.text);
-                    showStatus('Thank you for your message! I\'ll get back to you soon.', true);
-                    document.getElementById('contactForm').reset();
-                })
-                .catch(function(error) {
-                    console.error('FAILED...', error);
-                    showStatus('Sorry, there was an error sending your message. Please try again or contact me directly at kondasandeep56@gmail.com', false);
-                })
-                .finally(function() {
-                    // Re-enable button
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = originalText;
-                });
+                const submitBtn = document.getElementById('submitBtn');
+                const originalText = submitBtn.textContent;
+                
+                // Disable button and show loading state
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+
+                // Get form data
+                const templateParams = {
+                    from_name: document.getElementById('from_name').value,
+                    email: document.getElementById('email').value,
+                    subject: document.getElementById('subject').value,
+                    message: document.getElementById('message').value,
+                    to_email: 'kondasandeep56@gmail.com'
+                };
+
+                // Send email using EmailJS
+                emailjs.send(emailConfig.serviceId, emailConfig.templateId, templateParams)
+                    .then(function(response) {
+                        console.log('SUCCESS!', response.status, response.text);
+                        showStatus('Thank you for your message! I\'ll get back to you soon.', true);
+                        document.getElementById('contactForm').reset();
+                    })
+                    .catch(function(error) {
+                        console.error('FAILED...', error);
+                        showStatus('Sorry, there was an error sending your message. Please try again or contact me directly at kondasandeep56@gmail.com', false);
+                    })
+                    .finally(function() {
+                        // Re-enable button
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = originalText;
+                    });
+            });
         });
     </script>
 </body>
