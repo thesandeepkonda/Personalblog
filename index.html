@@ -1045,7 +1045,7 @@
             particlesContainer.appendChild(particle);
         }
 
-// Form submission handling (Formspree)
+// Form submission handling (Formspree or other endpoints)
 const form = document.querySelector('form');
 const statusMessage = document.getElementById('statusMessage');
 
@@ -1069,12 +1069,11 @@ form.addEventListener('submit', async (e) => {
             statusMessage.classList.add('status-success');
             form.reset();
         } else {
-            const data = await response.json();
-            if (Object.hasOwnProperty.call(data, 'errors')) {
-                statusMessage.textContent = data["errors"].map(error => error["message"]).join(", ");
-            } else if (response.status === 404) {
-                // Custom message for "Form not found"
+            const data = await response.json().catch(() => ({})); // fallback if no JSON
+            if (response.status === 404) {
                 statusMessage.textContent = 'Sorry, there was an error sending your message. Please try again or contact me directly at kondasandeep56@gmail.com.';
+            } else if (Object.hasOwnProperty.call(data, 'errors')) {
+                statusMessage.textContent = data["errors"].map(error => error["message"]).join(", ");
             } else {
                 statusMessage.textContent = 'Oops! There was a problem sending your message.';
             }
@@ -1089,6 +1088,7 @@ form.addEventListener('submit', async (e) => {
         statusMessage.style.display = 'block';
     }
 });
+
 
 
 
