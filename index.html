@@ -1046,46 +1046,28 @@
         }
 
         // Form submission handling (Formspree)
-        const form = document.querySelector('form');
-        const statusMessage = document.getElementById('statusMessage');
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            statusMessage.style.display = 'none'; // Hide previous message
+                <!-- Error message div -->
+                <div id="errorMessage" style="display:none; color: red;">
+                    Sorry, there was an error sending your message. Please try again or contact me directly at 
+                    kondasandeep56@gmail.com.
+                </div>
+            </div> <!-- ✅ Closing div for contact-form-container -->
+        </div> <!-- ✅ Closing div for contact-content -->
+    </div> <!-- ✅ Closing div for container -->
+</section>
 
-            const formData = new FormData(form);
-            try {
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
+<!-- Script to simulate form submission error -->
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault();  // Prevent the default form submission
 
-                if (response.ok) {
-                    statusMessage.textContent = 'Message sent successfully! I\'ll get back to you soon.';
-                    statusMessage.classList.remove('status-error');
-                    statusMessage.classList.add('status-success');
-                    form.reset();
-                } else {
-                    const data = await response.json();
-                    if (Object.hasOwnProperty.call(data, 'errors')) {
-                        statusMessage.textContent = data["errors"].map(error => error["message"]).join(", ");
-                    } else {
-                        statusMessage.textContent = 'Oops! There was a problem sending your message.';
-                    }
-                    statusMessage.classList.remove('status-success');
-                    statusMessage.classList.add('status-error');
-                }
-            } catch (error) {
-                statusMessage.textContent = 'Oops! There was a network error. Please try again.';
-                statusMessage.classList.remove('status-success');
-                statusMessage.classList.add('status-error');
-            } finally {
-                statusMessage.style.display = 'block';
-            }
-        });
+        // Simulate error (you can replace this with real logic later)
+        document.getElementById('errorMessage').style.display = 'block';
+
+        // Optional: Reset the form
+        this.reset();
+    });
 
         // --- Header Hide/Show on Scroll Logic ---
         const navbar = document.querySelector('.navbar');
