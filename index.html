@@ -1074,6 +1074,10 @@
                     const data = await response.json();
                     if (Object.hasOwnProperty.call(data, 'errors')) {
                         statusMessage.textContent = data["errors"].map(error => error["message"]).join(", ");
+                        <div id="errorMessage" style="display:none; color: red;">
+                    Sorry, there was an error sending your message. Please try again or contact me directly at 
+                    kondasandeep56@gmail.com.
+                </div>
                     } else {
                         statusMessage.textContent = 'Oops! There was a problem sending your message.';
                     }
@@ -1084,6 +1088,10 @@
                 statusMessage.textContent = 'Oops! There was a network error. Please try again.';
                 statusMessage.classList.remove('status-success');
                 statusMessage.classList.add('status-error');
+                <div id="errorMessage" style="display:none; color: red;">
+                    Sorry, there was an error sending your message. Please try again or contact me directly at 
+                    kondasandeep56@gmail.com.
+                </div>
             } finally {
                 statusMessage.style.display = 'block';
             }
