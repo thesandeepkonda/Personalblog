@@ -5,7 +5,7 @@
     <meta name="msvalidate.01" content="B83E4D6C2F55FF324CD32464E1840813" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sandeep Konda |Personal Blog | AWS & DevOps Engineer</title>
+    <title>Sandeep Konda | Personal Blog | AWS & DevOps Engineer</title>
     <link rel="icon" href="favicon.png" type="image/png">
     <meta name="description" content="Personal blog of Sandeep Konda – cloud enthusiast, developer, and tech writer.">
     <meta name="keywords" content="Sandeep Konda, cloud developer, personal blog, technology, DevOps, GitHub Pages">
@@ -1045,7 +1045,6 @@
             particlesContainer.appendChild(particle);
         }
 
-        // Form submission handling (Formspree)
 
            // Form submission handling (Formspree)
         const form = document.querySelector('form');
@@ -1074,10 +1073,7 @@
                     const data = await response.json();
                     if (Object.hasOwnProperty.call(data, 'errors')) {
                         statusMessage.textContent = data["errors"].map(error => error["message"]).join(", ");
-                        <div id="errorMessage" style="display:none; color: red;">
-                    Sorry, there was an error sending your message. Please try again or contact me directly at 
-                    kondasandeep56@gmail.com.
-                </div>
+                       
                     } else {
                         statusMessage.textContent = 'Oops! There was a problem sending your message.';
                     }
@@ -1088,10 +1084,7 @@
                 statusMessage.textContent = 'Oops! There was a network error. Please try again.';
                 statusMessage.classList.remove('status-success');
                 statusMessage.classList.add('status-error');
-                <div id="errorMessage" style="display:none; color: red;">
-                    Sorry, there was an error sending your message. Please try again or contact me directly at 
-                    kondasandeep56@gmail.com.
-                </div>
+            
             } finally {
                 statusMessage.style.display = 'block';
             }
