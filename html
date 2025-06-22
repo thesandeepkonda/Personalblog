@@ -1,6 +1,3 @@
-Website
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,56 +5,57 @@ Website
     <meta name="msvalidate.01" content="B83E4D6C2F55FF324CD32464E1840813" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   <title>Sandeep Konda | Cloud Enthusiast & Personal Blog</title>
+    <title>Sandeep Konda | Personal Blog | AWS & DevOps Engineer</title>
     <link rel="icon" href="favicon.png" type="image/png">
     <meta name="description" content="Personal blog of Sandeep Konda – cloud enthusiast, developer, and tech writer.">
-<meta name="keywords" content="Sandeep Konda, cloud developer, personal blog, technology, DevOps, GitHub Pages">
-<meta name="author" content="Sandeep Konda">
-<meta name="robots" content="index, follow">
+    <meta name="keywords" content="Sandeep Konda, cloud developer, personal blog, technology, DevOps, GitHub Pages">
+    <meta name="author" content="Sandeep Konda">
+    <meta name="robots" content="index, follow">
 
-<!-- Open Graph for WhatsApp and social media -->
-<meta property="og:title" content="Sandeep Konda's Personal Blog" />
-<meta property="og:description" content="Sharing thoughts on software development, web technologies, and coding projects." />
-<meta property="og:url" content="https://thesandeepkonda.github.io/Personalblog/" />
-<meta property="og:type" content="website" />
-<meta property="og:image" content="https://github.com/thesandeepkonda/Personalblog/blob/main/favicon.png/" />
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Sandeep Konda",
-  "url": "https://thesandeepkonda.github.io/Personalblog/",
-  "image": "https://thesandeepkonda.github.io/Personalblog/favicon.png",
-  "sameAs": [],
-  "description": "Personal blog of Sandeep Konda"
-}
-</script>
+    <meta property="og:title" content="Sandeep Konda's Personal Blog" />
+    <meta property="og:description" content="Sharing thoughts on software development, web technologies, and coding projects." />
+    <meta property="og:url" content="https://thesandeepkonda.github.io/Personalblog/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://github.com/thesandeepkonda/Personalblog/blob/main/favicon.png/" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Sandeep Konda",
+      "url": "https://thesandeepkonda.github.io/Personalblog/",
+      "image": "https://thesandeepkonda.github.io/Personalblog/favicon.png",
+      "sameAs": [],
+      "description": "Personal blog of Sandeep Konda"
+    }
+    </script>
 
-    
     <style>
-
         .navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(26, 26, 26, 0.95);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    z-index: 1000;
-    transition: all 0.3s ease;
-}
-.scroll-indicator {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 3px;
-    background: linear-gradient(45deg, #667eea, #764ba2);
-    z-index: 1001;
-    transition: width 0.1s ease;
-}
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease; /* Smooth transition for hide/show */
+        }
+        /* New CSS for hidden header */
+        .navbar-hidden {
+            transform: translateY(-100%);
+        }
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
 
-* {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -88,23 +86,14 @@ Website
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
- .container {
+        .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
         /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
+        /* .navbar rules are moved to the top for clarity regarding the new class */
 
         .nav-content {
             display: flex;
@@ -666,16 +655,7 @@ Website
         }
 
         /* Scroll indicator */
-        .scroll-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            z-index: 1001;
-            transition: width 0.1s ease;
-        }
+        /* .scroll-indicator rules are moved to the top for clarity */
 
         /* Animations */
         @keyframes fadeInUp {
@@ -716,7 +696,8 @@ Website
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-menu {
-                display: none;
+                /* You might want to implement a hamburger menu here for mobile navigation */
+                display: none; /* For now, it's hidden as per your original code */
             }
 
             .hero-title {
@@ -751,32 +732,29 @@ Website
                 align-items: center;
             }
         }
-      /* WhatsApp Button Design */
-.whatsapp-button {
-    background-color: #25D366;
-    color: white; /* White font color */
-    padding: 10px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 15px;
-}
+        /* WhatsApp Button Design */
+        .whatsapp-button {
+            background-color: #25D366;
+            color: white; /* White font color */
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
 
-.whatsapp-button:hover {
-    background-color: #20b358;
-}
-
-        
+        .whatsapp-button:hover {
+            background-color: #20b358;
+        }
     </style>
 </head>
 <body>
     <div class="bg-animation"></div>
     <div class="scroll-indicator" id="scrollIndicator"></div>
 
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-content">
@@ -791,7 +769,6 @@ Website
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="particles" id="particles"></div>
         <div class="container">
@@ -799,10 +776,10 @@ Website
                 <div class="hero-subtitle">AWS & DevOps Engineer</div>
                 <h1 class="hero-title">Sandeep Konda</h1>
                 <p class="hero-description">
-                    Architecting scalable cloud infrastructure and implementing DevOps best practices 
+                    Architecting scalable cloud infrastructure and implementing DevOps best practices
                     to accelerate digital transformation
                 </p>
-                
+
                 <div class="hero-stats">
                     <div class="stat-item">
                         <span class="stat-number">DevOps</span>
@@ -826,7 +803,6 @@ Website
         </div>
     </section>
 
-    <!-- Skills Section -->
     <section id="skills" class="section section-light">
         <div class="container">
             <h2 class="section-title">Technical Expertise</h2>
@@ -904,7 +880,6 @@ Website
         </div>
     </section>
 
-    <!-- Projects Section -->
     <section id="projects" class="section section-dark">
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
@@ -965,7 +940,7 @@ Website
                         </div>
                         <div class="project-links">
                             <a href="#" class="project-link">View Details</a>
-                            <a href="#" class="project-link">GitHub</a>
+                            <a href="#" class="project-link">Source Code</a>
                         </div>
                     </div>
                 </div>
@@ -973,23 +948,17 @@ Website
         </div>
     </section>
 
-   <!-- Contact Section -->
-<section id="contact" class="section section-dark">
-    <div class="container">
-        <h2 class="section-title">Get In Touch</h2>
-        <p class="section-subtitle">
-            Ready to discuss your next cloud project? Let's connect and build something amazing together.
-        </p>
-
-        <div class="contact-content">
-            <div class="contact-info">
-                <h3>Let's Work Together</h3>
-                <p>
-                    I'm always interested in discussing new opportunities, innovative projects,
-                    and ways to help businesses leverage cloud technologies.
-                </p>
-
-                <ul class="contact-details">
+    <section id="contact" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">
+                Let's connect and discuss your cloud and DevOps needs.
+            </p>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Reach Out Directly</h3>
+                    <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.</p>
+                    <ul class="contact-details">
                     <li>
                         <i>📧</i>
                         <span>kondasandeep56@gmail.com</span>
@@ -1003,61 +972,141 @@ Website
                         <span>Available for freelance & full-time</span>
                     </li>
                 </ul>
-
-                <!-- ✅ WhatsApp Button -->
-                <a href="https://wa.me/918008806996" class="whatsapp-button" target="_blank">
-                    <img src="assets/whatsapp-icon.png" alt="WhatsApp Icon" width="20">
-                    Chat on WhatsApp
-                </a>
-            </div> <!-- ✅ Closing div for contact-info -->
-
-            <!-- ✅ Contact Form -->
-            <div class="contact-form-container">
-                <form class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <label for="from_name">Name</label>
-                        <input type="text" id="from_name" name="from_name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="reply_to">Email</label>
-                        <input type="email" id="reply_to" name="reply_to" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit">Send Message</button>
-                </form>
-
-                <!-- Error message div -->
-                <div id="errorMessage" style="display:none; color: red;">
-                    Sorry, there was an error sending your message. Please try again or contact me directly at 
-                    kondasandeep56@gmail.com.
+                    <a href="https://wa.me/+918008806996" class="whatsapp-button" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.icons8.com/color/24/000000/whatsapp--v1.png" alt="WhatsApp Icon"/> Chat on WhatsApp
+                    </a>
                 </div>
-            </div> <!-- ✅ Closing div for contact-form-container -->
-        </div> <!-- ✅ Closing div for contact-content -->
-    </div> <!-- ✅ Closing div for container -->
-</section>
+                <div class="contact-form">
+                    <h3>Send Me a Message</h3>
+                    <form action="https://formspree.io/f/xbjnqzzk" method="POST">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="6" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                        <div class="status-message" id="statusMessage"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- Script to simulate form submission error -->
-<script>
-    document.getElementById('contactForm').addEventListener('submit', function(event) {
-        event.preventDefault();  // Prevent the default form submission
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; 2025 Sandeep Konda. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://github.com/thesandeepkonda" class="social-link" target="_blank" rel="noopener noreferrer">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/github.png" alt="GitHub"/>
+                </a>
+                <a href="https://www.linkedin.com/in/sandeepkonda07" class="social-link" target="_blank" rel="noopener noreferrer">
+                    <img src="https://img.icons8.com/ios-filled/24/ffffff/linkedin.png" alt="LinkedIn"/>
+                </a>
+                </div>
+        </div>
+    </footer>
 
-        // Simulate error (you can replace this with real logic later)
-        document.getElementById('errorMessage').style.display = 'block';
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
 
-        // Optional: Reset the form
-        this.reset();
-    });
-</script>
+        // Scroll indicator
+        window.addEventListener('scroll', () => {
+            const scrollIndicator = document.getElementById('scrollIndicator');
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollProgress = (window.scrollY / totalHeight) * 100;
+            scrollIndicator.style.width = scrollProgress + '%';
+        });
 
-<!-- Footer -->
-<footer class="footer">
-    <div class="container">
-        <p>&copy; Sandeep Konda. All rights reserved.</p>
-    </div>
-</footer>
+        // Dynamic particles for hero section
+        const particlesContainer = document.getElementById('particles');
+        const numParticles = 30;
 
+        for (let i = 0; i < numParticles; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.animationDuration = `${Math.random() * 5 + 5}s`; // 5 to 10 seconds
+            particle.style.animationDelay = `${Math.random() * 6}s`; // 0 to 6 seconds delay
+            particlesContainer.appendChild(particle);
+        }
+
+// Form submission handling (Formspree or other endpoints)
+const form = document.querySelector('form');
+const statusMessage = document.getElementById('statusMessage');
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    statusMessage.style.display = 'none'; // Hide previous message
+
+    const formData = new FormData(form);
+    try {
+        const response = await fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            statusMessage.textContent = 'Message sent successfully! I\'ll get back to you soon.';
+            statusMessage.classList.remove('status-error');
+            statusMessage.classList.add('status-success');
+            form.reset();
+        } else {
+            const data = await response.json().catch(() => ({})); // fallback if no JSON
+            if (response.status === 404) {
+                statusMessage.textContent = 'Sorry, there was an error sending your message. Please try again or contact me directly at kondasandeep56@gmail.com.';
+            } else if (Object.hasOwnProperty.call(data, 'errors')) {
+                statusMessage.textContent = data["errors"].map(error => error["message"]).join(", ");
+            } else {
+                statusMessage.textContent = 'Oops! There was a problem sending your message.';
+            }
+            statusMessage.classList.remove('status-success');
+            statusMessage.classList.add('status-error');
+        }
+    } catch (error) {
+        statusMessage.textContent = 'Oops! There was a network error. Please try again.';
+        statusMessage.classList.remove('status-success');
+        statusMessage.classList.add('status-error');
+    } finally {
+        statusMessage.style.display = 'block';
+    }
+});
+
+
+
+
+        // --- Header Hide/Show on Scroll Logic ---
+        const navbar = document.querySelector('.navbar');
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > lastScrollY) {
+                // Scrolling Down
+                navbar.classList.add('navbar-hidden');
+            } else {
+                // Scrolling Up
+                navbar.classList.remove('navbar-hidden');
+            }
+            lastScrollY = window.scrollY;
+        });
+        // --- End Header Hide/Show on Scroll Logic ---
+    </script>
 </body>
 </html>
