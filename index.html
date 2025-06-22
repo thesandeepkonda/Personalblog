@@ -752,6 +752,44 @@ flex-wrap: wrap;
     display: none;
   }
 }
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.column {
+  flex: 1 1 300px;
+}
+@media (max-width: 768px) {
+  .nav {
+    display: none; /* hide desktop nav */
+  }
+
+  .mobile-menu {
+    display: block; /* show mobile version */
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  font-size: 16px;
+  line-height: 1.5;
+}
+body {
+  overflow-x: hidden;
+}
 
 
     </style>
