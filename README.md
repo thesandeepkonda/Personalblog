@@ -73,7 +73,7 @@ Developed a suite of scripts to automate development workflows and reduce deploy
 
 ## 🤝 Let's Work Together
 
-I'm always open to exciting DevOps opportunities, freelance consulting, or collaboration on open-source infrastructure tools.
+I'm always open to exciting DevOps opportunities,  freelance consulting, or collaboration on open-source infrastructure tools.
 
 - 📧 **Email**: kondasandeep56@gmail.com  
 - 📍 **Location**: Hyderabad, India  
