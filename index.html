@@ -31,6 +31,85 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
     
     <style>
+        /* API Sandbox Styles */
+        .api-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            background: rgba(15, 15, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .api-sidebar { display: flex; flex-direction: column; gap: 0.8rem; }
+        
+        .api-btn {
+            background: #1a1a2e;
+            border: 1px solid #333;
+            padding: 1rem;
+            border-radius: 6px;
+            color: #ccc;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .api-btn:hover, .api-btn.active {
+            border-color: #00ff87;
+            background: rgba(0, 255, 135, 0.05);
+            color: #fff;
+        }
+
+        .method { font-weight: bold; margin-right: 10px; }
+        .method.get { color: #60efff; }
+        .method.post { color: #27c93f; }
+
+        .api-response-window {
+            background: #050505;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .api-window-header {
+            background: #111;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            border-bottom: 1px solid #333;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+        }
+
+        .status-code { color: #27c93f; }
+        .latency { color: #888; }
+
+        #json-output {
+            padding: 1.5rem;
+            color: #e0e0e0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            margin: 0;
+            overflow-x: auto;
+        }
+
+        /* JSON Syntax Highlighting Colors */
+        .string { color: #ce9178; }
+        .number { color: #b5cea8; }
+        .boolean { color: #569cd6; }
+        .null { color: #569cd6; }
+        .key { color: #9cdcfe; }
+
+        @media (max-width: 768px) {
+            .api-container { grid-template-columns: 1fr; }
+        }
+        
         /* Custom Hacker Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #050505; }
@@ -208,6 +287,42 @@
         .project-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
         .tech-tag { background: rgba(96, 239, 255, 0.1); color: #60efff; padding: 4px 10px; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.75rem; }
 
+<!-- NEW: API Sandbox Section -->
+    <section id="api-sandbox" class="section">
+        <div class="container">
+            <h2 class="section-title">Backend <span>Telemetry</span></h2>
+            <p class="section-subtitle">Simulated API responses from my e-commerce pricing engine and microservices.</p>
+            
+            <div class="api-container">
+                <!-- Left Side: API Endpoints -->
+                <div class="api-sidebar">
+                    <h3 style="color: #888; font-family: 'Fira Code', monospace; font-size: 0.85rem; margin-bottom: 1rem; text-transform: uppercase;">// Select Endpoint</h3>
+                    
+                    <button class="api-btn active" onclick="fetchDummyData('pricing')">
+                        <span class="method get">GET</span> /v1/pricing/multi-vendor-cart
+                    </button>
+                    
+                    <button class="api-btn" onclick="fetchDummyData('coupon')">
+                        <span class="method post">POST</span> /v1/coupons/validate
+                    </button>
+                    
+                    <button class="api-btn" onclick="fetchDummyData('kafka')">
+                        <span class="method get">GET</span> /v1/events/kafka-stream
+                    </button>
+                </div>
+
+                <!-- Right Side: JSON Response -->
+                <div class="api-response-window">
+                    <div class="api-window-header">
+                        <span id="api-status" class="status-code">200 OK</span>
+                        <span id="api-latency" class="latency">14ms</span>
+                    </div>
+                    <pre><code id="json-output" class="language-json"></code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+        
         /* Contact section */
         .contact-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
         .contact-form { background: rgba(255, 255, 255, 0.02); padding: 2.5rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); }
@@ -607,6 +722,102 @@
                 statusMessage.textContent = '{ "status": "error", "message": "Network Timeout" }';
             }
         });
+
+        // --- API Sandbox Logic ---
+        const dummyDatabases = {
+            pricing: {
+                timestamp: new Date().toISOString(),
+                transaction_id: "txn_99482_gst",
+                service: "Spring Boot Pricing Engine",
+                tax_compliance: "GST_APPLIED",
+                multi_vendor_cart: true,
+                variant_schema_config: {
+                    entity: "VendorVariantPricing",
+                    schema_strategy: "cross_schema_reference",
+                    vendor_id_location: "external_vendor_schema",
+                    integrity_check: "PASSED"
+                },
+                calculated_total: 1450.00
+            },
+            coupon: {
+                timestamp: new Date().toISOString(),
+                service: "Decoupled Coupon Service",
+                action: "VALIDATE_AND_APPLY",
+                integration_method: "isolated_logic_injection",
+                core_cart_modified: false,
+                discount_applied: 150.00,
+                status: "SUCCESS"
+            },
+            kafka: {
+                timestamp: new Date().toISOString(),
+                broker: "Amazon MSK",
+                topic: "cart-checkout-events",
+                partition: 2,
+                offset: 849201,
+                payload_type: "OrderProcessedEvent",
+                consumer_lag_ms: 4,
+                dead_letter_queue: "empty"
+            }
+        };
+
+        // Simple JSON syntax highlighter
+        function syntaxHighlight(json) {
+            if (typeof json != 'string') {
+                json = JSON.stringify(json, undefined, 2);
+            }
+            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                let cls = 'number';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'key';
+                    } else {
+                        cls = 'string';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'boolean';
+                } else if (/null/.test(match)) {
+                    cls = 'null';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+        }
+
+        function fetchDummyData(endpoint) {
+            // UI Updates
+            const buttons = document.querySelectorAll('.api-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            const output = document.getElementById('json-output');
+            const status = document.getElementById('api-status');
+            const latency = document.getElementById('api-latency');
+
+            // Simulate Network Loading
+            output.innerHTML = '<span style="color:#888;">Fetching payload from server...</span>';
+            status.textContent = "WAITING";
+            status.style.color = "#ffbd2e";
+            
+            // Generate random latency between 12ms and 65ms
+            const mockLatency = Math.floor(Math.random() * 53) + 12;
+
+            setTimeout(() => {
+                // Update timestamps dynamically to look real
+                dummyDatabases[endpoint].timestamp = new Date().toISOString();
+                
+                output.innerHTML = syntaxHighlight(dummyDatabases[endpoint]);
+                status.textContent = "200 OK";
+                status.style.color = "#27c93f";
+                latency.textContent = mockLatency + "ms";
+            }, mockLatency * 10); // multiplied by 10 just so the human eye can catch the "loading" state
+        }
+
+        // Initialize first API call on load
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.api-btn').click();
+        });
     </script>
+
+    
 </body>
 </html>
