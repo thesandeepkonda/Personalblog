@@ -31,31 +31,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* API Sandbox Styles */
-        .api-container { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; background: rgba(15, 15, 20, 0.8); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 2rem; }
-        .api-sidebar { display: flex; flex-direction: column; gap: 0.8rem; }
-        .api-btn { background: #1a1a2e; border: 1px solid #333; padding: 1rem; border-radius: 6px; color: #ccc; font-family: 'Fira Code', monospace; font-size: 0.85rem; text-align: left; cursor: pointer; transition: all 0.2s ease; }
-        .api-btn:hover, .api-btn.active { border-color: #00ff87; background: rgba(0, 255, 135, 0.05); color: #fff; }
-        .method { font-weight: bold; margin-right: 10px; }
-        .method.get { color: #60efff; }
-        .method.post { color: #27c93f; }
-        .api-response-window { background: #050505; border: 1px solid #333; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
-        .api-window-header { background: #111; padding: 10px 15px; display: flex; justify-content: flex-end; gap: 15px; border-bottom: 1px solid #333; font-family: 'Fira Code', monospace; font-size: 0.8rem; }
-        .status-code { color: #27c93f; }
-        .latency { color: #888; }
-        #json-output { padding: 1.5rem; color: #e0e0e0; font-family: 'Fira Code', monospace; font-size: 0.9rem; margin: 0; overflow-x: auto; }
-
-        /* JSON Syntax Highlighting Colors */
-        .string { color: #ce9178; }
-        .number { color: #b5cea8; }
-        .boolean { color: #569cd6; }
-        .null { color: #569cd6; }
-        .key { color: #9cdcfe; }
-
-        @media (max-width: 768px) {
-            .api-container { grid-template-columns: 1fr; }
-        }
-        
         /* Custom Hacker Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #050505; }
@@ -182,7 +157,7 @@
         .connector-progress { height: 100%; width: 0%; background: #00ff87; box-shadow: 0 0 10px #00ff87; animation: flowProgress 3s infinite linear; }
         @keyframes flowProgress { 0% { width: 0%; margin-left: 0%; } 50% { width: 50%; margin-left: 50%; } 100% { width: 0%; margin-left: 100%; } }
 
-        /* System Topology Section (AWS VPC Look) */
+        /* System Topology Section */
         .topology-wrapper {
             background: rgba(15, 15, 20, 0.8); border: 1px dashed rgba(255, 255, 255, 0.2);
             border-radius: 12px; padding: 3rem; display: flex; flex-direction: column; gap: 2rem; position: relative;
@@ -197,11 +172,10 @@
         .topo-box.aws { border-color: #ff9900; }
         .topo-box.database { border-color: #60efff; border-radius: 50% 50% 8px 8px; }
         .topo-line-vertical { position: absolute; width: 2px; height: 2rem; background: #333; bottom: -2rem; left: 50%; transform: translateX(-50%); z-index: 1; }
-        
         .vpc-box { border: 1px solid rgba(255, 153, 0, 0.3); padding: 2rem; border-radius: 8px; background: rgba(0,0,0,0.2); position: relative; width: 100%; margin-top: 2rem; }
         .vpc-label { position: absolute; top: -10px; left: 20px; background: #050505; padding: 0 10px; color: #ff9900; font-family: 'Fira Code', monospace; font-size: 0.8rem; }
 
-        /* NEW SPOTLIGHT HOVER EFFECT FOR ALL CARDS */
+        /* SPOTLIGHT HOVER EFFECT */
         .project-card, .skill-category, .topo-box { position: relative; overflow: hidden; }
         .project-card::after, .skill-category::after, .topo-box::after {
             content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
@@ -211,7 +185,7 @@
         }
         .project-card:hover::after, .skill-category:hover::after, .topo-box:hover::after { opacity: 1; }
 
-        /* Skills section */
+        /* Skills & Projects */
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
         .skill-category { background: rgba(255, 255, 255, 0.02); padding: 2.5rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
         .skill-category:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(0, 255, 135, 0.3); }
@@ -221,7 +195,6 @@
         .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
         .skill-tag { background: rgba(0, 255, 135, 0.1); color: #00ff87; padding: 4px 10px; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.75rem; }
 
-        /* Projects section */
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
         .project-card { background: rgba(255, 255, 255, 0.02); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); display: flex; flex-direction: column; transition: all 0.3s ease; }
         .project-card:hover { transform: translateY(-5px); border-color: rgba(96, 239, 255, 0.4); }
@@ -233,7 +206,33 @@
         .project-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
         .tech-tag { background: rgba(96, 239, 255, 0.1); color: #60efff; padding: 4px 10px; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.75rem; }
 
-        /* Contact section */
+        /* API Sandbox */
+        .api-container { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; background: rgba(15, 15, 20, 0.8); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 2rem; }
+        .api-sidebar { display: flex; flex-direction: column; gap: 0.8rem; }
+        .api-btn { background: #1a1a2e; border: 1px solid #333; padding: 1rem; border-radius: 6px; color: #ccc; font-family: 'Fira Code', monospace; font-size: 0.85rem; text-align: left; cursor: pointer; transition: all 0.2s ease; }
+        .api-btn:hover, .api-btn.active { border-color: #00ff87; background: rgba(0, 255, 135, 0.05); color: #fff; }
+        .method { font-weight: bold; margin-right: 10px; }
+        .method.get { color: #60efff; }
+        .method.post { color: #27c93f; }
+        .api-response-window { background: #050505; border: 1px solid #333; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
+        .api-window-header { background: #111; padding: 10px 15px; display: flex; justify-content: flex-end; gap: 15px; border-bottom: 1px solid #333; font-family: 'Fira Code', monospace; font-size: 0.8rem; }
+        .status-code { color: #27c93f; }
+        .latency { color: #888; }
+        #json-output { padding: 1.5rem; color: #e0e0e0; font-family: 'Fira Code', monospace; font-size: 0.9rem; margin: 0; overflow-x: auto; }
+        .string { color: #ce9178; } .number { color: #b5cea8; } .boolean { color: #569cd6; } .null { color: #569cd6; } .key { color: #9cdcfe; }
+
+        /* NEW: Live Log Streamer Styles */
+        .log-window { background: #050505; border: 1px solid #333; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .log-header { background: #111; padding: 10px 15px; display: flex; justify-content: space-between; border-bottom: 1px solid #333; font-family: 'Fira Code', monospace; font-size: 0.8rem; color: #888; }
+        .log-body { height: 300px; padding: 15px; overflow-y: auto; font-family: 'Fira Code', monospace; font-size: 0.85rem; display: flex; flex-direction: column; gap: 6px; }
+        .log-line { word-wrap: break-word; color: #ccc; }
+        .log-info { color: #60efff; font-weight: bold;}
+        .log-warn { color: #ffbd2e; font-weight: bold;}
+        .log-error { color: #ff5f56; font-weight: bold;}
+        .log-debug { color: #888; font-weight: bold;}
+        .log-timestamp { color: #27c93f; margin-right: 10px; }
+
+        /* Contact */
         .contact-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
         .contact-form { background: rgba(255, 255, 255, 0.02); padding: 2.5rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); }
         .form-group { margin-bottom: 1.5rem; }
@@ -246,7 +245,7 @@
         .footer { border-top: 1px solid rgba(255,255,255,0.05); padding: 2rem 0; text-align: center; font-family: 'Fira Code', monospace; font-size: 0.85rem; color: #666; }
 
         @media (max-width: 968px) {
-            .hero-grid, .about-grid, .contact-content { grid-template-columns: 1fr; }
+            .hero-grid, .about-grid, .contact-content, .api-container { grid-template-columns: 1fr; }
             .nav-menu { display: none; }
             .topo-tier { flex-direction: column; align-items: center; gap: 1rem; }
             .topo-box { width: 100%; max-width: 100%; }
@@ -353,7 +352,6 @@
                 <h3 style="color: #888; font-family: 'Fira Code', monospace; font-size: 0.9rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px;">// Live Contribution Matrix</h3>
                 <img src="https://ghchart.rshah.org/00ff87/thesandeepkonda" alt="Sandeep's GitHub Chart" style="width: 100%; max-width: 800px; opacity: 0.9; filter: drop-shadow(0 0 10px rgba(0,255,135,0.1));"/>
             </div>
-
         </div>
     </section>
 
@@ -521,7 +519,7 @@
         </div>
     </section>
 
-    <!-- NEW API SANDBOX SECTION -->
+    <!-- API Sandbox -->
     <section id="api-sandbox" class="section">
         <div class="container">
             <h2 class="section-title">Backend <span>Telemetry</span></h2>
@@ -547,6 +545,23 @@
                         <span id="api-latency" class="latency">14ms</span>
                     </div>
                     <pre><code id="json-output" class="language-json"></code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Live System Logs Streamer -->
+    <section id="live-logs" class="section">
+        <div class="container">
+            <h2 class="section-title">Live <span>System Logs</span></h2>
+            <p class="section-subtitle">Simulated real-time log stream from the Kubernetes cluster.</p>
+            <div class="log-window" id="log-window">
+                <div class="log-header">
+                    <span>● root@eks-cluster-prod:~</span>
+                    <span>tail -f /var/log/containers/*.log</span>
+                </div>
+                <div class="log-body" id="log-body">
+                    <!-- Logs inject here via JS -->
                 </div>
             </div>
         </div>
@@ -693,58 +708,36 @@
             }
         };
 
-        // Simple JSON syntax highlighter
         function syntaxHighlight(json) {
-            if (typeof json != 'string') {
-                json = JSON.stringify(json, undefined, 2);
-            }
+            if (typeof json != 'string') { json = JSON.stringify(json, undefined, 2); }
             json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
             return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
                 let cls = 'number';
                 if (/^"/.test(match)) {
-                    if (/:$/.test(match)) {
-                        cls = 'key';
-                    } else {
-                        cls = 'string';
-                    }
-                } else if (/true|false/.test(match)) {
-                    cls = 'boolean';
-                } else if (/null/.test(match)) {
-                    cls = 'null';
-                }
+                    if (/:$/.test(match)) { cls = 'key'; } else { cls = 'string'; }
+                } else if (/true|false/.test(match)) { cls = 'boolean'; } else if (/null/.test(match)) { cls = 'null'; }
                 return '<span class="' + cls + '">' + match + '</span>';
             });
         }
 
-        // Updated function to handle 'this' button element properly
         function fetchDummyData(buttonElement, endpoint) {
-            // UI Updates
             const buttons = document.querySelectorAll('.api-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
-            
-            if (buttonElement && buttonElement.classList) {
-                buttonElement.classList.add('active');
-            } else {
-                // Fallback for initial auto-load
-                document.querySelector('.api-btn').classList.add('active');
-            }
+            if (buttonElement && buttonElement.classList) { buttonElement.classList.add('active'); } 
+            else { document.querySelector('.api-btn').classList.add('active'); }
 
             const output = document.getElementById('json-output');
             const status = document.getElementById('api-status');
             const latency = document.getElementById('api-latency');
 
-            // Simulate Network Loading
             output.innerHTML = '<span style="color:#888;">Fetching payload from server...</span>';
             status.textContent = "WAITING";
             status.style.color = "#ffbd2e";
             
-            // Generate random latency between 12ms and 65ms
             const mockLatency = Math.floor(Math.random() * 53) + 12;
 
             setTimeout(() => {
-                // Update timestamps dynamically to look real
                 dummyDatabases[endpoint].timestamp = new Date().toISOString();
-                
                 output.innerHTML = syntaxHighlight(dummyDatabases[endpoint]);
                 status.textContent = "200 OK";
                 status.style.color = "#27c93f";
@@ -752,10 +745,49 @@
             }, mockLatency * 10);
         }
 
-        // Initialize first API call on load
         window.addEventListener('DOMContentLoaded', () => {
             fetchDummyData(document.querySelector('.api-btn'), 'pricing');
         });
+
+        // --- NEW: Live System Logs Streamer Logic ---
+        const logBody = document.getElementById('log-body');
+        const logMessages = [
+            { level: 'INFO', msg: '[Spring Boot] Started PricingApplication in 4.232 seconds', class: 'log-info' },
+            { level: 'INFO', msg: '[Kafka Consumer] Rebalancing partition assignments for topic: cart-events', class: 'log-info' },
+            { level: 'DEBUG', msg: '[HikariCP] Executing SQL: SELECT * FROM vendor_variant_pricing WHERE vendor_id = ?', class: 'log-debug' },
+            { level: 'WARN', msg: '[AWS ALB] Latency spike detected on target group tg-pricing-prod (120ms)', class: 'log-warn' },
+            { level: 'INFO', msg: '[Kubernetes] Scaled up replica set auth-service-deployment to 4 pods', class: 'log-info' },
+            { level: 'ERROR', msg: '[DynamoDB] ProvisionedThroughputExceededException - Retrying request...', class: 'log-error' },
+            { level: 'INFO', msg: '[Security] JWT Token validated successfully for user: admin_svc', class: 'log-info' },
+            { level: 'DEBUG', msg: '[Redis] Cache miss for key: user_session_9921', class: 'log-debug' },
+            { level: 'INFO', msg: '[Docker] Successfully pulled image 8392.dkr.ecr.aws/pricing:v2.1.4', class: 'log-info' }
+        ];
+
+        function pushLog() {
+            if(!logBody) return;
+            const log = logMessages[Math.floor(Math.random() * logMessages.length)];
+            const time = new Date().toISOString().split('T')[1].replace('Z', '');
+            
+            const logEl = document.createElement('div');
+            logEl.className = 'log-line';
+            logEl.innerHTML = `<span class="log-timestamp">[${time}]</span> <span class="${log.class}">[${log.level}]</span> ${log.msg}`;
+            
+            logBody.appendChild(logEl);
+            
+            // Keep only last 40 logs to prevent DOM bloat
+            if (logBody.children.length > 40) {
+                logBody.removeChild(logBody.firstChild);
+            }
+            
+            // Auto scroll to bottom
+            logBody.scrollTop = logBody.scrollHeight;
+            
+            // Random next delay between 500ms and 2500ms to look natural
+            setTimeout(pushLog, Math.random() * 2000 + 500);
+        }
+        
+        // Start log stream just after load
+        setTimeout(pushLog, 2000);
     </script>
 </body>
 </html>
