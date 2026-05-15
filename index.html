@@ -32,72 +32,18 @@
     
     <style>
         /* API Sandbox Styles */
-        .api-container {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 2rem;
-            background: rgba(15, 15, 20, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 2rem;
-        }
-
+        .api-container { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; background: rgba(15, 15, 20, 0.8); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 2rem; }
         .api-sidebar { display: flex; flex-direction: column; gap: 0.8rem; }
-        
-        .api-btn {
-            background: #1a1a2e;
-            border: 1px solid #333;
-            padding: 1rem;
-            border-radius: 6px;
-            color: #ccc;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.85rem;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .api-btn:hover, .api-btn.active {
-            border-color: #00ff87;
-            background: rgba(0, 255, 135, 0.05);
-            color: #fff;
-        }
-
+        .api-btn { background: #1a1a2e; border: 1px solid #333; padding: 1rem; border-radius: 6px; color: #ccc; font-family: 'Fira Code', monospace; font-size: 0.85rem; text-align: left; cursor: pointer; transition: all 0.2s ease; }
+        .api-btn:hover, .api-btn.active { border-color: #00ff87; background: rgba(0, 255, 135, 0.05); color: #fff; }
         .method { font-weight: bold; margin-right: 10px; }
         .method.get { color: #60efff; }
         .method.post { color: #27c93f; }
-
-        .api-response-window {
-            background: #050505;
-            border: 1px solid #333;
-            border-radius: 8px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .api-window-header {
-            background: #111;
-            padding: 10px 15px;
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-            border-bottom: 1px solid #333;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.8rem;
-        }
-
+        .api-response-window { background: #050505; border: 1px solid #333; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
+        .api-window-header { background: #111; padding: 10px 15px; display: flex; justify-content: flex-end; gap: 15px; border-bottom: 1px solid #333; font-family: 'Fira Code', monospace; font-size: 0.8rem; }
         .status-code { color: #27c93f; }
         .latency { color: #888; }
-
-        #json-output {
-            padding: 1.5rem;
-            color: #e0e0e0;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            margin: 0;
-            overflow-x: auto;
-        }
+        #json-output { padding: 1.5rem; color: #e0e0e0; font-family: 'Fira Code', monospace; font-size: 0.9rem; margin: 0; overflow-x: auto; }
 
         /* JSON Syntax Highlighting Colors */
         .string { color: #ce9178; }
@@ -287,42 +233,6 @@
         .project-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
         .tech-tag { background: rgba(96, 239, 255, 0.1); color: #60efff; padding: 4px 10px; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.75rem; }
 
-<!-- NEW: API Sandbox Section -->
-    <section id="api-sandbox" class="section">
-        <div class="container">
-            <h2 class="section-title">Backend <span>Telemetry</span></h2>
-            <p class="section-subtitle">Simulated API responses from my e-commerce pricing engine and microservices.</p>
-            
-            <div class="api-container">
-                <!-- Left Side: API Endpoints -->
-                <div class="api-sidebar">
-                    <h3 style="color: #888; font-family: 'Fira Code', monospace; font-size: 0.85rem; margin-bottom: 1rem; text-transform: uppercase;">// Select Endpoint</h3>
-                    
-                    <button class="api-btn active" onclick="fetchDummyData('pricing')">
-                        <span class="method get">GET</span> /v1/pricing/multi-vendor-cart
-                    </button>
-                    
-                    <button class="api-btn" onclick="fetchDummyData('coupon')">
-                        <span class="method post">POST</span> /v1/coupons/validate
-                    </button>
-                    
-                    <button class="api-btn" onclick="fetchDummyData('kafka')">
-                        <span class="method get">GET</span> /v1/events/kafka-stream
-                    </button>
-                </div>
-
-                <!-- Right Side: JSON Response -->
-                <div class="api-response-window">
-                    <div class="api-window-header">
-                        <span id="api-status" class="status-code">200 OK</span>
-                        <span id="api-latency" class="latency">14ms</span>
-                    </div>
-                    <pre><code id="json-output" class="language-json"></code></pre>
-                </div>
-            </div>
-        </div>
-    </section>
-        
         /* Contact section */
         .contact-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
         .contact-form { background: rgba(255, 255, 255, 0.02); padding: 2.5rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); }
@@ -380,7 +290,6 @@
                     <div class="hero-buttons">
                         <a href="#projects" class="btn btn-primary">Init_Projects()</a>
                         <a href="#contact" class="btn" style="color: #fff; border: 1px solid #333; background: transparent;">git commit --contact</a>
-                        <!-- NEW RESUME WGET BUTTON -->
                         <a href="Sandeep_Konda_Resume.pdf" target="_blank" class="btn" style="color: #60efff; border: 1px dashed #60efff; background: rgba(96, 239, 255, 0.05);">wget resume.pdf</a>
                     </div>
                 </div>
@@ -412,7 +321,6 @@
         </div>
     </div>
 
-    <!-- About Section & GitHub Matrix -->
     <section id="about" class="section">
         <div class="container">
             <h2 class="section-title">System <span>Profile</span></h2>
@@ -441,7 +349,6 @@
                 </div>
             </div>
 
-            <!-- NEW: Live GitHub Contribution Matrix -->
             <div class="github-matrix-container">
                 <h3 style="color: #888; font-family: 'Fira Code', monospace; font-size: 0.9rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px;">// Live Contribution Matrix</h3>
                 <img src="https://ghchart.rshah.org/00ff87/thesandeepkonda" alt="Sandeep's GitHub Chart" style="width: 100%; max-width: 800px; opacity: 0.9; filter: drop-shadow(0 0 10px rgba(0,255,135,0.1));"/>
@@ -450,7 +357,6 @@
         </div>
     </section>
 
-    <!-- Experience Timeline -->
     <section id="experience" class="section">
         <div class="container">
             <h2 class="section-title">Execution <span>Log</span></h2>
@@ -488,7 +394,6 @@
         </div>
     </section>
 
-    <!-- Architecture & Topology -->
     <section id="architecture" class="section">
         <div class="container">
             <h2 class="section-title">Deployment <span>Architecture</span></h2>
@@ -544,7 +449,6 @@
         </div>
     </section>
 
-    <!-- Tech Stack -->
     <section id="skills" class="section">
         <div class="container">
             <h2 class="section-title">Tech <span>Stack</span></h2>
@@ -579,7 +483,6 @@
         </div>
     </section>
 
-    <!-- Projects -->
     <section id="projects" class="section">
         <div class="container">
             <h2 class="section-title">Production <span>Deployments</span></h2>
@@ -618,7 +521,37 @@
         </div>
     </section>
 
-    <!-- Contact -->
+    <!-- NEW API SANDBOX SECTION -->
+    <section id="api-sandbox" class="section">
+        <div class="container">
+            <h2 class="section-title">Backend <span>Telemetry</span></h2>
+            <p class="section-subtitle">Simulated API responses from my e-commerce pricing engine and microservices.</p>
+            
+            <div class="api-container">
+                <div class="api-sidebar">
+                    <h3 style="color: #888; font-family: 'Fira Code', monospace; font-size: 0.85rem; margin-bottom: 1rem; text-transform: uppercase;">// Select Endpoint</h3>
+                    <button class="api-btn active" onclick="fetchDummyData(this, 'pricing')">
+                        <span class="method get">GET</span> /v1/pricing/multi-vendor-cart
+                    </button>
+                    <button class="api-btn" onclick="fetchDummyData(this, 'coupon')">
+                        <span class="method post">POST</span> /v1/coupons/validate
+                    </button>
+                    <button class="api-btn" onclick="fetchDummyData(this, 'kafka')">
+                        <span class="method get">GET</span> /v1/events/kafka-stream
+                    </button>
+                </div>
+
+                <div class="api-response-window">
+                    <div class="api-window-header">
+                        <span id="api-status" class="status-code">200 OK</span>
+                        <span id="api-latency" class="latency">14ms</span>
+                    </div>
+                    <pre><code id="json-output" class="language-json"></code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="contact" class="section">
         <div class="container">
             <h2 class="section-title">Establish <span>Connection</span></h2>
@@ -783,11 +716,18 @@
             });
         }
 
-        function fetchDummyData(endpoint) {
+        // Updated function to handle 'this' button element properly
+        function fetchDummyData(buttonElement, endpoint) {
             // UI Updates
             const buttons = document.querySelectorAll('.api-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
-            event.currentTarget.classList.add('active');
+            
+            if (buttonElement && buttonElement.classList) {
+                buttonElement.classList.add('active');
+            } else {
+                // Fallback for initial auto-load
+                document.querySelector('.api-btn').classList.add('active');
+            }
 
             const output = document.getElementById('json-output');
             const status = document.getElementById('api-status');
@@ -809,15 +749,13 @@
                 status.textContent = "200 OK";
                 status.style.color = "#27c93f";
                 latency.textContent = mockLatency + "ms";
-            }, mockLatency * 10); // multiplied by 10 just so the human eye can catch the "loading" state
+            }, mockLatency * 10);
         }
 
         // Initialize first API call on load
         window.addEventListener('DOMContentLoaded', () => {
-            document.querySelector('.api-btn').click();
+            fetchDummyData(document.querySelector('.api-btn'), 'pricing');
         });
     </script>
-
-    
 </body>
 </html>
