@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="google-site-verification" content="Fbn_1hR4B-INwpygJV5DBuGkbrJuhjmFdfM2COR21pg" />
+    <meta name="msvalidate.01" content="B83E4D6C2F55FF324CD32464E1840813" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sandeep Konda | Personal Blog | AWS, DevOps & Java Backend Engineer</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <meta name="description" content="Personal blog of Sandeep Konda – cloud, DevOps, and Java backend developer.">
+    <meta name="keywords" content="Sandeep Konda, cloud developer, personal blog, technology, DevOps, Java backend, GitHub Pages, Microservices, AWS">
+    <meta name="author" content="Sandeep Konda">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Sandeep Konda's Personal Blog" />
+    <meta property="og:description" content="Sharing thoughts on software development, web technologies, and coding projects." />
+    <meta property="og:url" content="https://thesandeepkonda.github.io/Personalblog/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/thesandeepkonda/Personalblog/main/favicon.png" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E0Z141D2L6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-E0Z141D2L6');
+    </script>
+    
+    <!-- Fira Code Font for Terminal/Code aesthetic -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom Hacker Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00ff87; }
+
+        .navbar {
+            position: fixed; top: 0; width: 100%; background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); z-index: 1000; transition: all 0.3s ease;
+        }
+        .navbar-hidden { transform: translateY(-100%); }
+        .scroll-indicator {
+            position: fixed; top: 0; left: 0; width: 0%; height: 3px;
+            background: linear-gradient(90deg, #00ff87, #60efff); z-index: 1001; transition: width 0.1s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #e0e0e0; background-color: #050505; overflow-x: hidden; }
+
+        .bg-animation {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #0f0f1a 50%, #050505 100%);
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #fff; text-decoration: none; letter-spacing: 1px; }
+        .logo span { color: #00ff87; }
+
+        .nav-menu { display: flex; list-style: none; gap: 1.5rem; }
+        .nav-link { color: #aaa; text-decoration: none; font-weight: 500; transition: color 0.3s ease; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-link:hover { color: #00ff87; }
+
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; width: 100%; }
+        .hero-content { animation: fadeInUp 1s ease; }
+        .hero-subtitle { color: #00ff87; font-family: 'Fira Code', monospace; font-size: 1rem; margin-bottom: 1rem; }
+        .hero-title { font-size: 4.5rem; font-weight: 800; color: #ffffff; margin-bottom: 1.5rem; line-height: 1.1; }
+        .hero-description { font-size: 1.2rem; color: #a0a0a0; margin-bottom: 2.5rem; line-height: 1.8; }
+
+        .terminal {
+            background: rgba(10, 10, 15, 0.9); border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); overflow: hidden; animation: fadeInUp 1.2s ease;
+        }
+        .terminal-header { background: #1a1a1a; padding: 10px 15px; display: flex; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .terminal-dots { display: flex; gap: 8px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot.red { background: #ff5f56; } .dot.yellow { background: #ffbd2e; } .dot.green { background: #27c93f; }
+        .terminal-title { color: #888; font-family: 'Fira Code', monospace; font-size: 0.8rem; margin-left: auto; margin-right: auto; }
+        .terminal-body { padding: 20px; font-family: 'Fira Code', monospace; font-size: 0.9rem; color: #00ff87; min-height: 250px; line-height: 1.5; }
+        .term-command { color: #60efff; } .term-string { color: #ce9178; } .term-key { color: #9cdcfe; }
+        .cursor { display: inline-block; width: 8px; height: 15px; background: #00ff87; animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 2px; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap;}
+        .btn {
+            padding: 12px 25px; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.9rem;
+            text-decoration: none; transition: all 0.3s ease; font-weight: 500; cursor: pointer; display: inline-block;
+        }
+        .btn-primary { background: #00ff87; color: #050505; border: 1px solid #00ff87; }
+        .btn-primary:hover { background: transparent; color: #00ff87; box-shadow: 0 0 15px rgba(0, 255, 135, 0.3); }
+
+        .metrics-banner {
+            background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05); padding: 2rem 0; margin-top: -50px; position: relative; z-index: 10;
+        }
+        .metrics-grid { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 2rem; }
+        .metric { text-align: center; font-family: 'Fira Code', monospace; }
+        .metric-value { font-size: 2rem; color: #00ff87; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .metric-value .pulse { width: 8px; height: 8px; background: #00ff87; border-radius: 50%; box-shadow: 0 0 10px #00ff87; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 135, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 255, 135, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 135, 0); } }
+        .metric-label { color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
+
+        .section { padding: 100px 0; }
+        .section-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; color: #fff; }
+        .section-title span { color: #00ff87; }
+        .section-subtitle { color: #888; margin-bottom: 4rem; max-width: 600px; }
+
+        /* ABOUT SECTION & GitHub Chart */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .about-text p { margin-bottom: 1.5rem; color: #aaa; font-size: 1.1rem; }
+        .about-text strong { color: #fff; }
+        .yaml-block {
+            background: #0f0f1a; border: 1px solid rgba(96, 239, 255, 0.2); border-radius: 8px;
+            padding: 1.5rem; font-family: 'Fira Code', monospace; font-size: 0.9rem; color: #ccc;
+        }
+        .yaml-key { color: #ff5f56; } .yaml-val { color: #27c93f; } .yaml-comment { color: #666; font-style: italic; }
+        
+        .github-matrix-container {
+            margin-top: 3rem; text-align: center; background: rgba(15, 15, 20, 0.5); padding: 2rem; 
+            border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); overflow-x: auto;
+        }
+
+        /* EXPERIENCE TIMELINE */
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; padding-left: 2rem; border-left: 2px solid rgba(0, 255, 135, 0.3); }
+        .timeline-item { position: relative; margin-bottom: 3rem; }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-dot {
+            position: absolute; left: -2.6rem; top: 0; width: 1.2rem; height: 1.2rem;
+            background: #050505; border: 2px solid #00ff87; border-radius: 50%; box-shadow: 0 0 10px rgba(0, 255, 135, 0.5);
+        }
+        .timeline-date { font-family: 'Fira Code', monospace; color: #60efff; font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .timeline-content h3 { color: #fff; font-size: 1.3rem; margin-bottom: 0.5rem; }
+        .timeline-content h4 { color: #888; font-weight: 400; margin-bottom: 1rem; }
+        .timeline-content p { color: #aaa; font-size: 0.95rem; margin-bottom: 1rem; }
+
+        /* CI/CD Pipeline Visualizer */
+        .pipeline-container {
+            background: rgba(20, 20, 25, 0.6); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px; padding: 3rem; margin-bottom: 4rem; overflow-x: auto;
+        }
+        .pipeline-header { font-family: 'Fira Code', monospace; color: #00ff87; margin-bottom: 2rem; font-size: 1.2rem; text-align: center; }
+        .pipeline-flow { display: flex; justify-content: space-between; align-items: center; position: relative; min-width: 800px; }
+        .pipeline-node { background: #1a1a2e; border: 1px solid #333; padding: 1.2rem; border-radius: 8px; text-align: center; z-index: 2; width: 130px; transition: all 0.3s ease; }
+        .pipeline-node:hover { border-color: #00ff87; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 255, 135, 0.1); }
+        .node-icon { font-size: 1.8rem; margin-bottom: 10px; }
+        .node-label { font-family: 'Fira Code', monospace; font-size: 0.75rem; color: #ccc; }
+        .pipeline-connector { flex-grow: 1; height: 2px; background: #333; position: relative; z-index: 1; min-width: 20px; }
+        .connector-progress { height: 100%; width: 0%; background: #00ff87; box-shadow: 0 0 10px #00ff87; animation: flowProgress 3s infinite linear; }
+        @keyframes flowProgress { 0% { width: 0%; margin-left: 0%; } 50% { width: 50%; margin-left: 50%; } 100% { width: 0%; margin-left: 100%; } }
+
+        /* System Topology Section */
+        .topology-wrapper {
+            background: rgba(15, 15, 20, 0.8); border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 12px; padding: 3rem; display: flex; flex-direction: column; gap: 2rem; position: relative;
+        }
+        .topo-label { position: absolute; top: 10px; left: 15px; font-family: 'Fira Code', monospace; font-size: 0.8rem; color: #888; }
+        .topo-tier { display: flex; justify-content: center; gap: 2rem; position: relative; flex-wrap: wrap; }
+        .topo-box {
+            background: #1a1a2e; border: 1px solid #444; padding: 1.2rem 1.5rem; border-radius: 8px;
+            text-align: center; font-family: 'Fira Code', monospace; font-size: 0.85rem; color: #fff; position: relative; z-index: 2; flex: 1; min-width: 180px; max-width: 220px;
+        }
+        .topo-box.accent { border-color: #00ff87; background: rgba(0, 255, 135, 0.05); }
+        .topo-box.aws { border-color: #ff9900; }
+        .topo-box.database { border-color: #60efff; border-radius: 50% 50% 8px 8px; }
+        .topo-line-vertical { position: absolute; width: 2px; height: 2rem; background: #333; bottom: -2rem; left: 50%; transform: translateX(-50%); z-index: 1; }
+        .vpc-box { border: 1px solid rgba(255, 153, 0, 0.3); padding: 2rem; border-radius: 8px; background: rgba(0,0,0,0.2); position: relative; width: 100%; margin-top: 2rem; }
+        .vpc-label { position: absolute; top: -10px; left: 20px; background: #050505; padding: 0 10px; color: #ff9900; font-family: 'Fira Code', monospace; font-size: 0.8rem; }
+
+        /* SPOTLIGHT HOVER EFFECT */
+        .project-card, .skill-category, .topo-box { position: relative; overflow: hidden; }
+        .project-card::after, .skill-category::after, .topo-box::after {
+            content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0; transition: opacity 0.3s ease;
+            background: radial-gradient(circle at center, rgba(0, 255, 135, 0.15) 0%, transparent 70%);
+            pointer-events: none; z-index: 1;
+        }
+        .project-card:hover::after, .skill-category:hover::after, .topo-box:hover::after { opacity: 1; }
+
+        /* Skills & Projects */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .skill-category { background: rgba(255, 255, 255, 0.02); padding: 2.5rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
+        .skill-category:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(0, 255, 135, 0.3); }
+        .skill-icon { font-size: 2.5rem; margin-bottom: 1.5rem; }
+        .skill-category h3 { font-size: 1.3rem; margin-bottom: 1rem; color: #fff; }
+        .skill-category p { color: #888; font-size: 0.95rem; margin-bottom: 1.5rem; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .skill-tag { background: rgba(0, 255, 135, 0.1); color: #00ff87; padding: 4px 10px; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.75rem; }
+
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+        .project-card { background: rgba(255, 255, 255, 0.02); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); display: flex; flex-direction: column; transition: all 0.3s ease; }
+        .project-card:hover { transform: translateY(-5px); border-color: rgba(96, 239, 255, 0.4); }
+        .project-header { padding: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 15px; }
+        .project-icon { font-size: 2rem; }
+        .project-title { font-size: 1.2rem; color: #fff; }
+        .project-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .project-description { color: #aaa; margin-bottom: 1.5rem; flex-grow: 1; font-size: 0.95rem; }
+        .project-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .tech-tag { background: rgba(96, 239, 255, 0.1); color: #60efff; padding: 4px 10px; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.75rem; }
+
+        /* API Sandbox */
+        .api-container { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; background: rgba(15, 15, 20, 0.8); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 2rem; }
+        .api-sidebar { display: flex; flex-direction: column; gap: 0.8rem; }
+        .api-btn { background: #1a1a2e; border: 1px solid #333; padding: 1rem; border-radius: 6px; color: #ccc; font-family: 'Fira Code', monospace; font-size: 0.85rem; text-align: left; cursor: pointer; transition: all 0.2s ease; }
+        .api-btn:hover, .api-btn.active { border-color: #00ff87; background: rgba(0, 255, 135, 0.05); color: #fff; }
+        .method { font-weight: bold; margin-right: 10px; }
+        .method.get { color: #60efff; }
+        .method.post { color: #27c93f; }
+        .api-response-window { background: #050505; border: 1px solid #333; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
+        .api-window-header { background: #111; padding: 10px 15px; display: flex; justify-content: flex-end; gap: 15px; border-bottom: 1px solid #333; font-family: 'Fira Code', monospace; font-size: 0.8rem; }
+        .status-code { color: #27c93f; }
+        .latency { color: #888; }
+        #json-output { padding: 1.5rem; color: #e0e0e0; font-family: 'Fira Code', monospace; font-size: 0.9rem; margin: 0; overflow-x: auto; }
+        .string { color: #ce9178; } .number { color: #b5cea8; } .boolean { color: #569cd6; } .null { color: #569cd6; } .key { color: #9cdcfe; }
+
+        /* NEW: Live Log Streamer Styles */
+        .log-window { background: #050505; border: 1px solid #333; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .log-header { background: #111; padding: 10px 15px; display: flex; justify-content: space-between; border-bottom: 1px solid #333; font-family: 'Fira Code', monospace; font-size: 0.8rem; color: #888; }
+        .log-body { height: 300px; padding: 15px; overflow-y: auto; font-family: 'Fira Code', monospace; font-size: 0.85rem; display: flex; flex-direction: column; gap: 6px; }
+        .log-line { word-wrap: break-word; color: #ccc; }
+        .log-info { color: #60efff; font-weight: bold;}
+        .log-warn { color: #ffbd2e; font-weight: bold;}
+        .log-error { color: #ff5f56; font-weight: bold;}
+        .log-debug { color: #888; font-weight: bold;}
+        .log-timestamp { color: #27c93f; margin-right: 10px; }
+
+        /* Contact */
+        .contact-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+        .contact-form { background: rgba(255, 255, 255, 0.02); padding: 2.5rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; color: #888; font-family: 'Fira Code', monospace; font-size: 0.9rem;}
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; background: #0f0f0f; border: 1px solid #333; color: #fff; border-radius: 4px; font-family: 'Inter', sans-serif; transition: all 0.3s; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #00ff87; box-shadow: 0 0 10px rgba(0, 255, 135, 0.1); }
+        .submit-btn { background: #00ff87; color: #000; padding: 12px 30px; border: none; border-radius: 4px; font-family: 'Fira Code', monospace; cursor: pointer; font-weight: bold; width: 100%; transition: all 0.3s; }
+        .submit-btn:hover { background: #60efff; }
+
+        .footer { border-top: 1px solid rgba(255,255,255,0.05); padding: 2rem 0; text-align: center; font-family: 'Fira Code', monospace; font-size: 0.85rem; color: #666; }
+
+        @media (max-width: 968px) {
+            .hero-grid, .about-grid, .contact-content, .api-container { grid-template-columns: 1fr; }
+            .nav-menu { display: none; }
+            .topo-tier { flex-direction: column; align-items: center; gap: 1rem; }
+            .topo-box { width: 100%; max-width: 100%; }
+        }
+        
+        .whatsapp-button {
+            background-color: #25D366; color: #000; padding: 10px 15px; border-radius: 4px;
+            text-decoration: none; font-weight: bold; font-family: 'Fira Code', monospace;
+            font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="#home" class="logo">Sandeep<span>Konda</span></a>
+                <ul class="nav-menu">
+                    <li><a href="#about" class="nav-link">// About</a></li>
+                    <li><a href="#experience" class="nav-link">// Log</a></li>
+                    <li><a href="#architecture" class="nav-link">// Infra</a></li>
+                    <li><a href="#skills" class="nav-link">// Stack</a></li>
+                    <li><a href="#projects" class="nav-link">// Deployments</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-subtitle">~$ whoami</div>
+                    <h1 class="hero-title">Cloud Native<br/>Architect.</h1>
+                    <p class="hero-description">
+                        Bridging the gap between robust Java backend systems and scalable DevOps pipelines. I automate infrastructure, containerize applications, and engineer serverless APIs.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">Init_Projects()</a>
+                        <a href="#contact" class="btn" style="color: #fff; border: 1px solid #333; background: transparent;">git commit --contact</a>
+                        <a href="Sandeep_Konda_Resume1.pdf" target="_blank" class="btn" style="color: #60efff; border: 1px dashed #60efff; background: rgba(96, 239, 255, 0.05);">wget resume.pdf</a>
+                    </div>
+                </div>
+                
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <div class="dot red"></div>
+                            <div class="dot yellow"></div>
+                            <div class="dot green"></div>
+                        </div>
+                        <div class="terminal-title">bash - root@aws-prod-server</div>
+                    </div>
+                    <div class="terminal-body">
+                        <span class="term-command">$ curl -X GET https://api.sandeep.dev/v1/profile</span><br/>
+                        <div id="typewriter-output" style="margin-top: 10px;"></div><span class="cursor"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="metrics-banner">
+        <div class="container metrics-grid">
+            <div class="metric"><div class="metric-value"><div class="pulse"></div> 99.99%</div><div class="metric-label">System Uptime</div></div>
+            <div class="metric"><div class="metric-value">42ms</div><div class="metric-label">Avg API Latency</div></div>
+            <div class="metric"><div class="metric-value">50+</div><div class="metric-label">Deployments</div></div>
+            <div class="metric"><div class="metric-value">0</div><div class="metric-label">Active Incidents</div></div>
+        </div>
+    </div>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">System <span>Profile</span></h2>
+            <p class="section-subtitle">The human behind the infrastructure and code.</p>
+            
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Hello! I'm <strong>Sandeep Konda</strong>, a passionate software engineer based in Hyderabad, India. I started my journey deep in the trenches of <strong>DevOps</strong>, mastering Linux systems, CI/CD pipelines, and cloud automation.</p>
+                    <p>Realizing that true scalability requires deep application-level knowledge, I expanded my expertise into <strong>Java Backend Development</strong>. Today, I operate at the intersection of both disciplines.</p>
+                    <p>I don't just write code; I design how it's packaged, how it scales, and how it survives in production. Whether I'm decoupling a monolith into Spring Boot microservices or writing Terraform scripts to spin up a Kubernetes cluster, my goal is always the same: <strong>reliability, security, and performance.</strong></p>
+                </div>
+                <div class="yaml-block">
+                    <span class="yaml-comment"># profile_config.yml</span><br><br>
+                    <span class="yaml-key">apiVersion</span>: <span class="yaml-val">v1</span><br>
+                    <span class="yaml-key">kind</span>: <span class="yaml-val">Engineer</span><br>
+                    <span class="yaml-key">metadata</span>:<br>
+                    &nbsp;&nbsp;<span class="yaml-key">name</span>: <span class="yaml-val">Sandeep Konda</span><br>
+                    &nbsp;&nbsp;<span class="yaml-key">location</span>: <span class="yaml-val">Hyderabad, India</span><br>
+                    <span class="yaml-key">spec</span>:<br>
+                    &nbsp;&nbsp;<span class="yaml-key">primary_roles</span>:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;- <span class="yaml-val">DevOps Engineer</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;- <span class="yaml-val">Java Backend Developer</span><br>
+                    &nbsp;&nbsp;<span class="yaml-key">core_languages</span>: [<span class="yaml-val">"Java"</span>, <span class="yaml-val">"Python"</span>, <span class="yaml-val">"Bash"</span>]<br>
+                    &nbsp;&nbsp;<span class="yaml-key">operating_system</span>: <span class="yaml-val">Linux (Ubuntu/RHEL)</span><br>
+                    &nbsp;&nbsp;<span class="yaml-key">coffee_dependency</span>: <span class="yaml-val">true</span>
+                </div>
+            </div>
+
+            <div class="github-matrix-container">
+                <h3 style="color: #888; font-family: 'Fira Code', monospace; font-size: 0.9rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px;">// Live Contribution Matrix</h3>
+                <img src="https://ghchart.rshah.org/00ff87/thesandeepkonda" alt="Sandeep's GitHub Chart" style="width: 100%; max-width: 800px; opacity: 0.9; filter: drop-shadow(0 0 10px rgba(0,255,135,0.1));"/>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Execution <span>Log</span></h2>
+            <p class="section-subtitle">A timeline of my professional journey and technical milestones.</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Present</div>
+                    <div class="timeline-content">
+                        <h3>DevOps & Java Backend Engineer</h3>
+                        <h4>Freelance & Contract Projects</h4>
+                        <p>Currently acting as a dual-threat engineer. I architect decoupling strategies for legacy applications using Spring Boot and manage the complete deployment lifecycle via AWS EKS, Jenkins, and Terraform. Successfully reduced API response times and deployment failure rates across multiple client projects.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Previous Role</div>
+                    <div class="timeline-content">
+                        <h3>DevOps Engineer</h3>
+                        <h4>Enterprise Infrastructure</h4>
+                        <p>Managed massive cloud migrations and automated infrastructure provisioning. Authored CI/CD pipelines using GitLab CI and Jenkins, containerized monoliths using Docker, and established observability stacks (Prometheus/Grafana) that reduced MTTR (Mean Time To Resolution) by 40%.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Milestone</div>
+                    <div class="timeline-content">
+                        <h3>Cloud & Backend Certification</h3>
+                        <h4>Continuous Learning</h4>
+                        <p>Dedicated significant time to mastering the Java ecosystem (Spring, Hibernate) to bridge the gap between operations and development, culminating in my transition to full-stack backend architecture.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="architecture" class="section">
+        <div class="container">
+            <h2 class="section-title">Deployment <span>Architecture</span></h2>
+            <p class="section-subtitle">Automating the path from local code to highly available cloud infrastructure with built-in security and monitoring.</p>
+            
+            <div class="pipeline-container">
+                <div class="pipeline-header">Standard CI/CD Lifecycle</div>
+                <div class="pipeline-flow">
+                    <div class="pipeline-node"><div class="node-icon">💻</div><div class="node-label">1. Code (Git)</div></div>
+                    <div class="pipeline-connector"><div class="connector-progress"></div></div>
+                    <div class="pipeline-node"><div class="node-icon">🛡️</div><div class="node-label">2. SAST (Sonar)</div></div>
+                    <div class="pipeline-connector"><div class="connector-progress" style="animation-delay: 0.5s;"></div></div>
+                    <div class="pipeline-node"><div class="node-icon">⚙️</div><div class="node-label">3. Build (Jenkins)</div></div>
+                    <div class="pipeline-connector"><div class="connector-progress" style="animation-delay: 1s;"></div></div>
+                    <div class="pipeline-node"><div class="node-icon">🐳</div><div class="node-label">4. Image (Docker)</div></div>
+                    <div class="pipeline-connector"><div class="connector-progress" style="animation-delay: 1.5s;"></div></div>
+                    <div class="pipeline-node"><div class="node-icon">☁️</div><div class="node-label">5. Deploy (EKS)</div></div>
+                    <div class="pipeline-connector"><div class="connector-progress" style="animation-delay: 2s;"></div></div>
+                    <div class="pipeline-node" style="border-color: #60efff;"><div class="node-icon">📊</div><div class="node-label">6. Monitor (Grafana)</div></div>
+                </div>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 4rem;">Core <span>Infrastructure</span></h2>
+            <p class="section-subtitle">A high-level view of how my microservices handle incoming traffic, process events, and manage data within an AWS Cloud environment.</p>
+            
+            <div class="topology-wrapper">
+                <div class="topo-label">AWS Cloud Environment</div>
+                <div class="topo-tier"><div class="topo-box aws">🌐 Amazon Route 53 (DNS)</div></div>
+
+                <div class="vpc-box">
+                    <div class="vpc-label">Virtual Private Cloud (VPC)</div>
+                    <div class="topo-tier"><div class="topo-box aws" style="width: 80%; max-width: none;">⚖️ Application Load Balancer (ALB) / API Gateway</div></div>
+
+                    <div style="border: 1px solid rgba(50, 108, 229, 0.4); border-radius: 8px; padding: 2rem; margin-top: 2rem; background: rgba(50, 108, 229, 0.05); position: relative;">
+                        <div class="topo-label" style="color: #326ce5;">Kubernetes Cluster (Amazon EKS)</div>
+                        <div class="topo-tier" style="margin-top: 1rem;">
+                            <div class="topo-box accent">☕ Spring Boot Pod<br><span style="color: #888; font-size: 0.75rem;">(Auth Service)</span></div>
+                            <div class="topo-box accent">☕ Spring Boot Pod<br><span style="color: #888; font-size: 0.75rem;">(Core API Service)</span></div>
+                            <div class="topo-box accent">☕ Spring Boot Pod<br><span style="color: #888; font-size: 0.75rem;">(Background Jobs)</span></div>
+                        </div>
+                        <div class="topo-tier" style="margin-top: 1.5rem;">
+                            <div class="topo-box" style="background: rgba(0,0,0,0.5); font-size: 0.75rem; padding: 0.5rem; max-width: 150px; border-color: #666;">👁️ Prometheus Sidecar</div>
+                        </div>
+                    </div>
+
+                    <div class="topo-tier" style="margin-top: 2rem;">
+                        <div class="topo-box database">🗄️ AWS RDS<br><span style="color: #888; font-size: 0.75rem;">(PostgreSQL Primary)</span></div>
+                        <div class="topo-box database">⚡ ElastiCache<br><span style="color: #888; font-size: 0.75rem;">(Redis Session Store)</span></div>
+                        <div class="topo-box aws">📨 Amazon MSK<br><span style="color: #888; font-size: 0.75rem;">(Managed Kafka)</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Tech <span>Stack</span></h2>
+            <p class="section-subtitle">Core technologies I use to build, secure, and deploy enterprise applications.</p>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="skill-icon">☕</div><h3>Java Backend</h3><p>Architecting decoupled microservices and production-grade APIs.</p>
+                    <div class="skill-tags"><span class="skill-tag">Java 17+</span> <span class="skill-tag">Spring Boot</span> <span class="skill-tag">Microservices</span> <span class="skill-tag">Hibernate</span></div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-icon">☁️</div><h3>Cloud Infra</h3><p>Designing scalable, fault-tolerant environments on AWS.</p>
+                    <div class="skill-tags"><span class="skill-tag">AWS Lambda</span> <span class="skill-tag">EC2 & VPC</span> <span class="skill-tag">S3 & CloudFront</span> <span class="skill-tag">EKS</span></div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-icon">🐳</div><h3>Container Orchestration</h3><p>Managing isolated deployment environments and clusters.</p>
+                    <div class="skill-tags"><span class="skill-tag">Docker</span> <span class="skill-tag">Kubernetes</span> <span class="skill-tag">Helm</span></div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-icon">🔄</div><h3>CI/CD & Automation</h3><p>Building zero-downtime deployment pipelines.</p>
+                    <div class="skill-tags"><span class="skill-tag">Jenkins</span> <span class="skill-tag">GitLab CI</span> <span class="skill-tag">Terraform</span> <span class="skill-tag">Ansible</span></div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-icon">📨</div><h3>Event-Driven Architecture</h3><p>Designing asynchronous communication between microservices.</p>
+                    <div class="skill-tags"><span class="skill-tag">Apache Kafka</span> <span class="skill-tag">RabbitMQ</span> <span class="skill-tag">AWS SQS</span></div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-icon">🗄️</div><h3>Database Architecture</h3><p>Managing schema design and multi-tenant logic.</p>
+                    <div class="skill-tags"><span class="skill-tag">PostgreSQL</span> <span class="skill-tag">DynamoDB</span> <span class="skill-tag">Redis Cache</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Production <span>Deployments</span></h2>
+            <p class="section-subtitle">Real-world systems architecture and backend engineering solutions.</p>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header"><div class="project-icon">🛒</div><h3 class="project-title">E-Commerce Pricing Engine</h3></div>
+                    <div class="project-content">
+                        <p class="project-description">Engineered a Spring Boot backend handling complex multi-vendor cart calculations and GST tax compliance. Designed strictly decoupled logic methods allowing frontend and external service teams to easily integrate pricing logic without altering core cart mechanisms or existing coupon services.</p>
+                        <div class="project-tech"><span class="tech-tag">Java</span> <span class="tech-tag">Spring Boot</span> <span class="tech-tag">REST APIs</span> <span class="tech-tag">PostgreSQL</span></div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header"><div class="project-icon">📡</div><h3 class="project-title">Real-Time Event Stream</h3></div>
+                    <div class="project-content">
+                        <p class="project-description">Developed a high-throughput event streaming platform to process async background tasks across microservices. Implemented Apache Kafka as the message broker to ensure zero data loss during high traffic spikes, coupling it with Spring WebFlux for reactive API responses.</p>
+                        <div class="project-tech"><span class="tech-tag">Apache Kafka</span> <span class="tech-tag">Spring WebFlux</span> <span class="tech-tag">Docker</span></div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header"><div class="project-icon">⚡</div><h3 class="project-title">Serverless Cloud Backend</h3></div>
+                    <div class="project-content">
+                        <p class="project-description">Architected highly scalable backends using AWS serverless components and managed production rollouts for frontend applications. Handled build cycles while managing robust IAM roles, S3 bucket policies, and distributing content globally via CloudFront.</p>
+                        <div class="project-tech"><span class="tech-tag">AWS Lambda</span> <span class="tech-tag">DynamoDB</span> <span class="tech-tag">API Gateway</span></div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header"><div class="project-icon">☸️</div><h3 class="project-title">K8s Microservices Platform</h3></div>
+                    <div class="project-content">
+                        <p class="project-description">Built a scalable microservices platform using Kubernetes, featuring automated CI/CD pipelines via Jenkins and comprehensive monitoring using Prometheus & Grafana. Reduced deployment friction and ensured high availability across distributed nodes.</p>
+                        <div class="project-tech"><span class="tech-tag">Kubernetes</span> <span class="tech-tag">Jenkins</span> <span class="tech-tag">Terraform</span> <span class="tech-tag">Grafana</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Sandbox -->
+    <section id="api-sandbox" class="section">
+        <div class="container">
+            <h2 class="section-title">Backend <span>Telemetry</span></h2>
+            <p class="section-subtitle">Simulated API responses from my e-commerce pricing engine and microservices.</p>
+            
+            <div class="api-container">
+                <div class="api-sidebar">
+                    <h3 style="color: #888; font-family: 'Fira Code', monospace; font-size: 0.85rem; margin-bottom: 1rem; text-transform: uppercase;">// Select Endpoint</h3>
+                    <button class="api-btn active" onclick="fetchDummyData(this, 'pricing')">
+                        <span class="method get">GET</span> /v1/pricing/multi-vendor-cart
+                    </button>
+                    <button class="api-btn" onclick="fetchDummyData(this, 'coupon')">
+                        <span class="method post">POST</span> /v1/coupons/validate
+                    </button>
+                    <button class="api-btn" onclick="fetchDummyData(this, 'kafka')">
+                        <span class="method get">GET</span> /v1/events/kafka-stream
+                    </button>
+                </div>
+
+                <div class="api-response-window">
+                    <div class="api-window-header">
+                        <span id="api-status" class="status-code">200 OK</span>
+                        <span id="api-latency" class="latency">14ms</span>
+                    </div>
+                    <pre><code id="json-output" class="language-json"></code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Live System Logs Streamer -->
+    <section id="live-logs" class="section">
+        <div class="container">
+            <h2 class="section-title">Live <span>System Logs</span></h2>
+            <p class="section-subtitle">Simulated real-time log stream from the Kubernetes cluster.</p>
+            <div class="log-window" id="log-window">
+                <div class="log-header">
+                    <span>● root@eks-cluster-prod:~</span>
+                    <span>tail -f /var/log/containers/*.log</span>
+                </div>
+                <div class="log-body" id="log-body">
+                    <!-- Logs inject here via JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Establish <span>Connection</span></h2>
+            <div class="contact-content">
+                <div>
+                    <h3 style="color: #fff; margin-bottom: 20px;">// Open Ports</h3>
+                    <p style="color: #888; margin-bottom: 30px;">Looking to architect a new backend, optimize your cloud infrastructure, or automate your pipelines? Send a payload.</p>
+                    
+                    <div style="font-family: 'Fira Code', monospace; color: #aaa; line-height: 2;">
+                        <div><span style="color: #00ff87;">email:</span> kondasandeep56@gmail.com</div>
+                        <div><span style="color: #00ff87;">location:</span> Hyderabad, TS, India</div>
+                        <div><span style="color: #00ff87;">status:</span> Available for opportunities</div>
+                    </div>
+
+                    <a href="https://wa.me/+918008806996" class="whatsapp-button" target="_blank">[ Execute WhatsApp Chat ]</a>
+                </div>
+
+                <div class="contact-form">
+                    <form action="https://formspree.io/f/xbjnqzzk" method="POST">
+                        <div class="form-group"><label for="name">req.body.name</label><input type="text" id="name" name="name" required></div>
+                        <div class="form-group"><label for="email">req.body.email</label><input type="email" id="email" name="email" required></div>
+                        <div class="form-group"><label for="message">req.body.message</label><textarea id="message" name="message" rows="4" required></textarea></div>
+                        <button type="submit" class="submit-btn">POST /api/message</button>
+                        <div id="statusMessage" style="margin-top: 15px; font-family: 'Fira Code', monospace; font-size: 0.85rem; display: none;"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>System maintained by Sandeep Konda © 2026</p>
+            <div style="margin-top: 15px; display: flex; justify-content: center; gap: 15px;">
+                <a href="https://github.com/thesandeepkonda" target="_blank" style="color: #888; text-decoration: none;">GitHub</a>
+                <a href="https://www.linkedin.com/in/sandeepkonda07" target="_blank" style="color: #888; text-decoration: none;">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Terminal Typewriter Effect
+        const jsonResponse = `{
+  <span class="term-key">"name"</span>: <span class="term-string">"Sandeep Konda"</span>,
+  <span class="term-key">"roles"</span>: [
+    <span class="term-string">"DevOps Engineer"</span>, 
+    <span class="term-string">"Java Backend Developer"</span>
+  ],
+  <span class="term-key">"location"</span>: <span class="term-string">"Hyderabad, India"</span>,
+  <span class="term-key">"status"</span>: <span class="term-string">"200 OK"</span>
+}`;
+        
+        const outputDiv = document.getElementById('typewriter-output');
+        setTimeout(() => { outputDiv.innerHTML = jsonResponse; }, 1200);
+
+        // Scroll logic
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const scrollIndicator = document.getElementById('scrollIndicator');
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollProgress = (window.scrollY / totalHeight) * 100;
+            scrollIndicator.style.width = scrollProgress + '%';
+            
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) { navbar.style.background = 'rgba(5, 5, 5, 0.98)'; } 
+            else { navbar.style.background = 'rgba(10, 10, 10, 0.95)'; }
+        });
+
+        // Form handling
+        const form = document.querySelector('form');
+        const statusMessage = document.getElementById('statusMessage');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            statusMessage.style.display = 'block';
+            statusMessage.style.color = '#888';
+            statusMessage.textContent = 'Processing payload...';
+
+            const formData = new FormData(form);
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method, body: formData, headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    statusMessage.style.color = '#00ff87';
+                    statusMessage.textContent = '{ "status": "success", "message": "Payload delivered." }';
+                    form.reset();
+                } else {
+                    statusMessage.style.color = '#ff5f56';
+                    statusMessage.textContent = '{ "status": "error", "code": 500 }';
+                }
+            } catch (error) {
+                statusMessage.style.color = '#ff5f56';
+                statusMessage.textContent = '{ "status": "error", "message": "Network Timeout" }';
+            }
+        });
+
+        // --- API Sandbox Logic ---
+        const dummyDatabases = {
+            pricing: {
+                timestamp: new Date().toISOString(),
+                transaction_id: "txn_99482_gst",
+                service: "Spring Boot Pricing Engine",
+                tax_compliance: "GST_APPLIED",
+                multi_vendor_cart: true,
+                variant_schema_config: {
+                    entity: "VendorVariantPricing",
+                    schema_strategy: "cross_schema_reference",
+                    vendor_id_location: "external_vendor_schema",
+                    integrity_check: "PASSED"
+                },
+                calculated_total: 1450.00
+            },
+            coupon: {
+                timestamp: new Date().toISOString(),
+                service: "Decoupled Coupon Service",
+                action: "VALIDATE_AND_APPLY",
+                integration_method: "isolated_logic_injection",
+                core_cart_modified: false,
+                discount_applied: 150.00,
+                status: "SUCCESS"
+            },
+            kafka: {
+                timestamp: new Date().toISOString(),
+                broker: "Amazon MSK",
+                topic: "cart-checkout-events",
+                partition: 2,
+                offset: 849201,
+                payload_type: "OrderProcessedEvent",
+                consumer_lag_ms: 4,
+                dead_letter_queue: "empty"
+            }
+        };
+
+        function syntaxHighlight(json) {
+            if (typeof json != 'string') { json = JSON.stringify(json, undefined, 2); }
+            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                let cls = 'number';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) { cls = 'key'; } else { cls = 'string'; }
+                } else if (/true|false/.test(match)) { cls = 'boolean'; } else if (/null/.test(match)) { cls = 'null'; }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+        }
+
+        function fetchDummyData(buttonElement, endpoint) {
+            const buttons = document.querySelectorAll('.api-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            if (buttonElement && buttonElement.classList) { buttonElement.classList.add('active'); } 
+            else { document.querySelector('.api-btn').classList.add('active'); }
+
+            const output = document.getElementById('json-output');
+            const status = document.getElementById('api-status');
+            const latency = document.getElementById('api-latency');
+
+            output.innerHTML = '<span style="color:#888;">Fetching payload from server...</span>';
+            status.textContent = "WAITING";
+            status.style.color = "#ffbd2e";
+            
+            const mockLatency = Math.floor(Math.random() * 53) + 12;
+
+            setTimeout(() => {
+                dummyDatabases[endpoint].timestamp = new Date().toISOString();
+                output.innerHTML = syntaxHighlight(dummyDatabases[endpoint]);
+                status.textContent = "200 OK";
+                status.style.color = "#27c93f";
+                latency.textContent = mockLatency + "ms";
+            }, mockLatency * 10);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchDummyData(document.querySelector('.api-btn'), 'pricing');
+        });
+
+        // --- NEW: Live System Logs Streamer Logic ---
+        const logBody = document.getElementById('log-body');
+        const logMessages = [
+            { level: 'INFO', msg: '[Spring Boot] Started PricingApplication in 4.232 seconds', class: 'log-info' },
+            { level: 'INFO', msg: '[Kafka Consumer] Rebalancing partition assignments for topic: cart-events', class: 'log-info' },
+            { level: 'DEBUG', msg: '[HikariCP] Executing SQL: SELECT * FROM vendor_variant_pricing WHERE vendor_id = ?', class: 'log-debug' },
+            { level: 'WARN', msg: '[AWS ALB] Latency spike detected on target group tg-pricing-prod (120ms)', class: 'log-warn' },
+            { level: 'INFO', msg: '[Kubernetes] Scaled up replica set auth-service-deployment to 4 pods', class: 'log-info' },
+            { level: 'ERROR', msg: '[DynamoDB] ProvisionedThroughputExceededException - Retrying request...', class: 'log-error' },
+            { level: 'INFO', msg: '[Security] JWT Token validated successfully for user: admin_svc', class: 'log-info' },
+            { level: 'DEBUG', msg: '[Redis] Cache miss for key: user_session_9921', class: 'log-debug' },
+            { level: 'INFO', msg: '[Docker] Successfully pulled image 8392.dkr.ecr.aws/pricing:v2.1.4', class: 'log-info' }
+        ];
+
+        function pushLog() {
+            if(!logBody) return;
+            const log = logMessages[Math.floor(Math.random() * logMessages.length)];
+            const time = new Date().toISOString().split('T')[1].replace('Z', '');
+            
+            const logEl = document.createElement('div');
+            logEl.className = 'log-line';
+            logEl.innerHTML = `<span class="log-timestamp">[${time}]</span> <span class="${log.class}">[${log.level}]</span> ${log.msg}`;
+            
+            logBody.appendChild(logEl);
+            
+            // Keep only last 40 logs to prevent DOM bloat
+            if (logBody.children.length > 40) {
+                logBody.removeChild(logBody.firstChild);
+            }
+            
+            // Auto scroll to bottom
+            logBody.scrollTop = logBody.scrollHeight;
+            
+            // Random next delay between 500ms and 2500ms to look natural
+            setTimeout(pushLog, Math.random() * 2000 + 500);
+        }
+        
+        // Start log stream just after load
+        setTimeout(pushLog, 2000);
+    </script>
+</body>
+</html>
